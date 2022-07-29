@@ -1,14 +1,17 @@
 class Player:
     def __init__(self, avatar: str) -> None:
-        self.avatar = avatar
+        self.__avatar = avatar
         self.score = 0
         self.positions = []
+
+    def get_avatar(self):
+      return self.__avatar
 
 
 class Board:
     def __init__(self) -> None:
 
-        self.board = ''' 
+        self.__board = ''' 
                     1 | 2 | 3 
                     ===+===+===  
                     4 | 5 | 6  
@@ -16,13 +19,13 @@ class Board:
                     7 | 8 | 9 
                     '''
 
-        self.available_moves = [
+        self.__available_moves = [
             '1', '2', '3',
             '4', '5', '6',
             '7', '8', '9'
         ]
 
-        self.winning_combinations = [
+        self.__winning_combinations = [
             # Horizontal
             ['1', '2', '3'], 
             ['4', '5', '6'], 
@@ -37,30 +40,30 @@ class Board:
             ]
 
     def draw_board(self):
-        print(self.board)
+        return self.__board
 
     def __update_Board(self, avatar: str, position: str):
 
-        self.board = self.board.replace(position, avatar)
+        self.__board = self.__board.replace(position, avatar)
 
 
     def ask_for_move(self, player):
 
-        position = input(f'{player.avatar} turn: Input the position you wish to play: ')
+        position = input(f'{player.get_avatar()} turn: Input the position you wish to play: ')
         
-        if position in self.available_moves:
-            self.available_moves.remove(position)
-            self.__update_Board(player.avatar, position)
+        if position in self.__available_moves:
+            self.__available_moves.remove(position)
+            self.__update_Board(player.get_avatar(), position)
             player.positions.append(position)
 
         else:
-            print(f'Invalid Position. Available positions are: {self.available_moves}')
-            self.draw_board()
+            print(f'Invalid Position. Available positions are: {self.__available_moves}')
+            print(self.draw_board())
             self.ask_for_move(player)
 
 
     def end_game(self, player):
-        for winning_combination in self.winning_combinations:
+        for winning_combination in self.__winning_combinations:
             winning_combo = 0
             for position in winning_combination:
                 for player_position in player.positions:
@@ -68,10 +71,10 @@ class Board:
                         winning_combo += 1
                 if winning_combo == 3:
                     player.score += 1
-                    print(player.avatar + " Won!!")
+                    print(player.get_avatar() + " Wins!!")
                     return True
 
-        if len(self.available_moves) == 0:
+        if len(self.__available_moves) == 0:
             print('Draw') 
             return True
             
@@ -94,12 +97,11 @@ def tictactoe():
 
             import os
             os.system('cls')
-            
 
             print(f'Current scores are: \nPlayer-1: {player_1.score}\nPlayer-2: {player_2.score}')
 
             #Draw Board
-            board.draw_board()  
+            print(board.draw_board())
 
             #Ask for move
             board.ask_for_move(player)
@@ -110,7 +112,7 @@ def tictactoe():
                 #check if the game has ended by returning true for win or draw
                 if board.end_game(player):
 
-                    board.draw_board()
+                    print(board.draw_board())
 
                     #if a player has won or drawn. Ask to play again.or end game.
                     to_continue = input('Do you wish to continue playing? ').upper()
