@@ -106,7 +106,7 @@ def tictactoe():
 
                 #check if the game has ended by returning true for win or draw
                 if board.end_game(player):
-                    
+
                     board.draw_board()
 
                     #if a player has won or drawn. Ask to play again.or end game.
