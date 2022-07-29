@@ -57,11 +57,11 @@ class Board:
 
 
     def end_game(self, player):
-        for combination in self.winning_combinations:
+        for winning_combination in self.winning_combinations:
             winning_combo = 0
-            for winning_position in combination:
+            for position in winning_combination:
                 for player_position in player.positions:
-                    if winning_position == player_position:
+                    if position == player_position:
                         winning_combo += 1
                 if winning_combo == 3:
                     player.score += 1
@@ -113,7 +113,7 @@ def tictactoe():
                     if to_continue == 'Y':
 
                         tictactoe()
-                        
+
                         for player in players:
 
                             player.positions = []
