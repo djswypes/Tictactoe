@@ -15,6 +15,7 @@ class Board:
                     ===+===+===
                     7 | 8 | 9 
                     '''
+
         self.available_moves = [
             '1', '2', '3',
             '4', '5', '6',
@@ -55,7 +56,7 @@ class Board:
             self.ask_for_move(player)
 
 
-    def check_winner(self, player):
+    def end_game(self, player):
         for combination in self.winning_combinations:
             winning_combo = 0
             for winning_position in combination:
@@ -103,14 +104,18 @@ def tictactoe():
             #Start checking for a winner when a player has made more than two moves.
             if len(player.positions) > 2:
 
-                #check if the player has won return true for win or draw.
-                if board.check_winner(player):
+                #check if the game has ended by returning true for win or draw
+                if board.end_game(player):
 
                     #if a player has won or drawn. Ask to play again.or end game.
                     to_continue = input('Do you wish to continue playing? ').upper()
+
                     if to_continue == 'Y':
+
                         tictactoe()
+                        
                         for player in players:
+
                             player.positions = []
 
                     else:
