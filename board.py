@@ -35,7 +35,6 @@ class Board:
     def update_Board(self, avatar: str, position: str):
 
         self.__board = self.__board.replace(position, avatar)
-        print('replaced successfully')
 
 
     def ask_for_move(self, player):
