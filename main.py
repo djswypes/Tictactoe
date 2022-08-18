@@ -18,7 +18,7 @@ def tictactoe():
         for player in players:
 
             import os
-            os.system('cls')
+            os.system("cls")
 
             print(f'Current scores are: \nPlayer-1: {player_1.score}\nPlayer-2: {player_2.score}')
 
@@ -26,11 +26,12 @@ def tictactoe():
             print(board.draw_board())
 
             #Ask for move
-            pos = board.ask_for_move(player)
-            
-            #Updating the Board
+            pos = None
+            while pos == None:
+                pos = board.ask_for_move(player)
+    
             board.update_Board(player.get_avatar(), pos)
-
+            
             #Start checking for a winner when a player has made more than two moves.
             if len(player.positions) > 2:
 

@@ -35,6 +35,7 @@ class Board:
     def update_Board(self, avatar: str, position: str):
 
         self.__board = self.__board.replace(position, avatar)
+        print('replaced successfully')
 
 
     def ask_for_move(self, player):
@@ -45,12 +46,13 @@ class Board:
             self.__available_moves.remove(position)
             player.positions.append(position)
 
+            return position 
+
         else:
             print(f'Invalid Position. Available positions are: {self.__available_moves}')
             print(self.draw_board())
-            self.ask_for_move(player)
-        
-        return position
+
+            return
 
 
     def end_game(self, player):
