@@ -7,6 +7,16 @@ player_2 = Player('O')
 
 players = [player_1, player_2]
 
+from random import choice
+
+randomized_players = []
+randomized_players.append(choice(players))
+while len(randomized_players) < 2:
+    player = choice(players)
+    if randomized_players[0] != player:
+        randomized_players.append(player)
+
+
 def tictactoe():
 
     board = Board()
@@ -15,7 +25,7 @@ def tictactoe():
 
     while game_is_on:
     
-        for player in players:
+        for player in randomized_players:
 
             import os
             os.system("cls")
